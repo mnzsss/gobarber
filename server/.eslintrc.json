@@ -23,6 +23,10 @@
     "@typescript-eslint/camelcase": "off",
     "class-methods-use-this": "off",
     "prettier/prettier": "error",
+    "@typescript-eslint/interface-name-prefix": [
+      "error",
+      { "prefixWithI": "always" }
+    ],
     "@typescript-eslint/no-unused-vars": [
       "error",
       {
