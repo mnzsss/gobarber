@@ -23,6 +23,7 @@
     "@typescript-eslint/camelcase": "off",
     "class-methods-use-this": "off",
     "prettier/prettier": "error",
+    "no-useless-constructor": "off",
     "@typescript-eslint/interface-name-prefix": [
       "error",
       { "prefixWithI": "always" }
