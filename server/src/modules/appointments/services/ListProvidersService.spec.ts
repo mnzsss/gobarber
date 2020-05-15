@@ -1,12 +1,10 @@
-import AppError from '@shared/errors/AppError';
-
 import FakeUserRepository from '@modules/users/repositories/fakes/FakeUsersRepository';
 import ListProvidersService from './ListProvidersService';
 
 let fakeUserRepository: FakeUserRepository;
 let listProviders: ListProvidersService;
 
-describe('UpdateProfile', () => {
+describe('ListProviders', () => {
   beforeEach(() => {
     fakeUserRepository = new FakeUserRepository();
     listProviders = new ListProvidersService(fakeUserRepository);
