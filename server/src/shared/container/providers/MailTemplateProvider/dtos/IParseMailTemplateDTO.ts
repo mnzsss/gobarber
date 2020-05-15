@@ -1,5 +1,5 @@
 export default interface IParseMailTemplateDTO {
-  template: string;
+  file: string;
   variables: {
     [key: string]: string | number;
   };
