@@ -5,7 +5,7 @@ import AppError from '@shared/errors/AppError';
 
 import authConfig from '@config/auth';
 
-interface TokenPayload {
+interface ITokenPayload {
   iat: number;
   exp: number;
   sub: string;
@@ -27,7 +27,7 @@ export default function enchureAuthenticated(
   try {
     const decoded = verify(token, authConfig.secret);
 
-    const { sub } = decoded as TokenPayload;
+    const { sub } = decoded as ITokenPayload;
 
     req.user = {
       id: sub,
