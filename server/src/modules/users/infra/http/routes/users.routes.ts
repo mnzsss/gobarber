@@ -10,7 +10,7 @@ import UserAvatarController from '../controllers/UserAvatarController';
 import enchureAuthenticated from '../middlewares/enchureAuthenticated';
 
 const usersRouter = Router();
-const upload = multer(uploadConfig);
+const upload = multer(uploadConfig.multer);
 
 usersRouter.post(
   '/',

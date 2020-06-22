@@ -13,7 +13,7 @@ class UserAvatarController {
       avatarFileName: req.file.filename,
     });
 
-    return res.json({ user: classToClass(user) });
+    return res.json(classToClass(user));
   }
 }
 
