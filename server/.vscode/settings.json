@@ -2,7 +2,7 @@
   "sqltools.connections": [
     {
       "database": "gobarber",
-      "dialect": "PostgreSQL",
+      "driver": "PostgreSQL",
       "name": "GoBarber",
       "password": "docker",
       "port": 5432,
