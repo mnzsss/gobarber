@@ -18,7 +18,7 @@ usersRouter.post(
     [Segments.BODY]: {
       name: Joi.string().required(),
       email: Joi.string().email().required(),
-      passowrd: Joi.string().required(),
+      password: Joi.string().required(),
     },
   }),
   UsersController.create,
