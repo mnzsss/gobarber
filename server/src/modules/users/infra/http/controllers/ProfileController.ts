@@ -30,7 +30,7 @@ class ProfileController {
       password,
     });
 
-    return res.json({ user: classToClass(user) });
+    return res.json(classToClass(user));
   }
 }
 
