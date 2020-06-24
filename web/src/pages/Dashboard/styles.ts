@@ -192,6 +192,7 @@ export const Appointment = styled.div`
     color: var(--gray);
     font-size: 20px;
     line-height: 26px;
+    width: 80px;
 
     svg {
       color: var(--primary);
