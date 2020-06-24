@@ -90,6 +90,7 @@ export const Schedule = styled.div`
     span {
       display: flex;
       align-items: center;
+      text-transform: capitalize;
     }
 
     span + span::before {
