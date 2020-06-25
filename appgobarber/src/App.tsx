@@ -3,13 +3,17 @@ import React from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 import { StatusBar } from 'react-native';
 
+import AppProvider from './hooks';
+
 import AuthRoutes from './routes';
 
 const App: React.FC = () => {
   return (
     <NavigationContainer>
       <StatusBar barStyle="light-content" backgroundColor="#312e38" />
-      <AuthRoutes />
+      <AppProvider>
+        <AuthRoutes />
+      </AppProvider>
     </NavigationContainer>
   );
 };

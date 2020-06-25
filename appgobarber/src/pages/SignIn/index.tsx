@@ -21,6 +21,8 @@ import logo from '../../assets/logo.png';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
 
+import { useAuth } from '../../hooks/auth';
+
 import {
   Container,
   Title,
@@ -40,30 +42,39 @@ const SignIn: React.FC = () => {
   const passwordInputRef = useRef<TextInput>(null);
 
   const navigation = useNavigation();
+  const { signIn } = useAuth();
 
-  const handleSignIn = useCallback(async (data: SignInFormData) => {
-    try {
-      formRef.current?.setErrors({});
+  const handleSignIn = useCallback(
+    async (data: SignInFormData) => {
+      try {
+        formRef.current?.setErrors({});
 
-      const schema = Yup.object().shape({
-        email: Yup.string().required().email(),
-        password: Yup.string().required(),
-      });
+        const schema = Yup.object().shape({
+          email: Yup.string().required().email(),
+          password: Yup.string().required(),
+        });
 
-      await schema.validate(data, { abortEarly: false });
-    } catch (err) {
-      if (err instanceof Yup.ValidationError) {
-        const errors = getValidationErrors(err);
+        await schema.validate(data, { abortEarly: false });
 
-        formRef.current?.setErrors(errors);
+        await signIn({
+          email: data.email,
+          password: data.password,
+        });
+      } catch (err) {
+        if (err instanceof Yup.ValidationError) {
+          const errors = getValidationErrors(err);
+
+          formRef.current?.setErrors(errors);
+        }
+
+        Alert.alert(
+          'Erro na Autenticação',
+          'Ocorreu um Erro ao realizer o logon, tente novamente',
+        );
       }
-
-      Alert.alert(
-        'Erro na Autenticação',
-        'Ocorreu um Erro ao realizer o logon, tente novamente',
-      );
-    }
-  }, []);
+    },
+    [signIn],
+  );
 
   return (
     <>
