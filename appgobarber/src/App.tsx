@@ -5,14 +5,14 @@ import { StatusBar } from 'react-native';
 
 import AppProvider from './hooks';
 
-import AuthRoutes from './routes';
+import Routes from './routes';
 
 const App: React.FC = () => {
   return (
     <NavigationContainer>
       <StatusBar barStyle="light-content" backgroundColor="#312e38" />
       <AppProvider>
-        <AuthRoutes />
+        <Routes />
       </AppProvider>
     </NavigationContainer>
   );
