@@ -54,7 +54,7 @@ const CreateAppointment: React.FC = () => {
   const [providers, setProviders] = useState<Provider[]>([]);
 
   const { goBack, navigate } = useNavigation();
-  const { user, signOut } = useAuth();
+  const { user } = useAuth();
   const { params } = useRoute();
 
   const { providerId } = params as RouteParams;
@@ -168,7 +168,7 @@ const CreateAppointment: React.FC = () => {
           <HeaderTitle>Cabeleireiros</HeaderTitle>
         </HeaderBack>
 
-        <ProfileButton onPress={signOut}>
+        <ProfileButton onPress={() => navigate('Profile')}>
           <UserAvatar
             source={{
               uri: user.avatar_url.includes('null')
