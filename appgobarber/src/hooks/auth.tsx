@@ -27,6 +27,7 @@ interface SiginInProps {
 
 interface AuthContextData {
   user: User;
+  token: string;
   loading: boolean;
   signIn({ email, password }: SiginInProps): Promise<void>;
   signOut(): void;
@@ -48,6 +49,8 @@ export const AuthProvider: React.FC = ({ children }) => {
 
       if (token[1] && user[1]) {
         setData({ token: token[1], user: JSON.parse(user[1]) });
+
+        api.defaults.headers.authorization = `Bearer ${token[1]}`;
       }
 
       setLoading(false);
@@ -93,6 +96,7 @@ export const AuthProvider: React.FC = ({ children }) => {
     <AuthContext.Provider
       value={{
         user: data.user,
+        token: data.token,
         loading,
         signIn,
         signOut,
