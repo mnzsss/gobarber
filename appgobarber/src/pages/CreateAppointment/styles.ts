@@ -103,7 +103,7 @@ export const OpenDatePickerButton = styled(RectButton)`
   border-radius: 10px;
   align-items: center;
   justify-content: center;
-  margin: 0 20px;
+  margin: 0 24px;
 `;
 
 export const OpenDatePickerButtonText = styled.Text`
@@ -146,4 +146,19 @@ export const HourText = styled.Text<HourTextProps>`
   color: ${({ selected }) => (selected ? '#232129' : '#f4ede8')};
   font-family: 'RobotoSlab-Regular';
   font-size: 16px;
+`;
+
+export const CreateAppointmentButton = styled(RectButton)`
+  height: 50px;
+  background: #ff9000;
+  border-radius: 10px;
+  align-items: center;
+  justify-content: center;
+  margin: 0 24px 24px;
+`;
+
+export const CreateAppointmentButtonText = styled.Text`
+  font-family: 'RobotoSlab-Medium';
+  font-size: 18px;
+  color: #232129;
 `;
