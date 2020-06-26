@@ -33,12 +33,14 @@ interface ProfileFormData {
   name: string;
   email: string;
   password: string;
+  old_password: string;
+  password_confirmation: string;
 }
 
 const Profile: React.FC = () => {
   const formRef = useRef<FormHandles>(null);
 
-  const { user } = useAuth();
+  const { user, updateUser } = useAuth();
 
   const emailInputRef = useRef<TextInput>(null);
   const oldPasswordInputRef = useRef<TextInput>(null);
@@ -53,16 +55,50 @@ const Profile: React.FC = () => {
         formRef.current?.setErrors({});
 
         const schema = Yup.object().shape({
-          name: Yup.string().required(),
-          email: Yup.string().required().email(),
-          password: Yup.string().min(6),
+          name: Yup.string().required('Nome obrigatório'),
+          email: Yup.string()
+            .required('E-mail obrigatório')
+            .email('Digite um e-mail válido'),
+          old_password: Yup.string(),
+          password: Yup.string().when('old_password', {
+            is: val => !!val.length,
+            then: Yup.string().required().min(6, 'No minimo 6 digitos.'),
+            otherwise: Yup.string(),
+          }),
+          password_confirmation: Yup.string()
+            .when('old_password', {
+              is: val => !!val.length,
+              then: Yup.string().required().min(6, 'No minimo 6 digitos.'),
+              otherwise: Yup.string(),
+            })
+            .oneOf([Yup.ref('password'), null], 'Senha não combina.'),
         });
 
         await schema.validate(data, { abortEarly: false });
 
-        await api.post('/users', data);
+        const {
+          name,
+          email,
+          password,
+          old_password,
+          password_confirmation,
+        } = data;
 
-        Alert.alert('Sucesso!', 'Agora está tudo certo para fazer logon.');
+        const formData = {
+          name,
+          email,
+          ...(old_password && {
+            old_password,
+            password,
+            password_confirmation,
+          }),
+        };
+
+        const res = await api.put('/profile', formData);
+
+        updateUser(res.data);
+
+        Alert.alert('Perfil Atualizado!');
 
         navigation.goBack();
       } catch (err) {
@@ -75,12 +111,12 @@ const Profile: React.FC = () => {
         }
 
         Alert.alert(
-          'Erro no Cadastro',
+          'Erro na Atualização do Perfil',
           'Verifique os dados informados e tente novamente.',
         );
       }
     },
-    [navigation],
+    [navigation, updateUser],
   );
 
   return (
@@ -107,7 +143,7 @@ const Profile: React.FC = () => {
               <Title>Meu Perfil</Title>
             </View>
 
-            <Form ref={formRef} onSubmit={handleProfile}>
+            <Form initialData={user} ref={formRef} onSubmit={handleProfile}>
               <Input
                 name="name"
                 icon="user"
