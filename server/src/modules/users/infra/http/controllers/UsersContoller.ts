@@ -12,7 +12,7 @@ class UsersController {
 
     const user = await createUser.run({ name, email, password });
 
-    return res.json({ user: classToClass(user) });
+    return res.json(classToClass(user));
   }
 }
 
