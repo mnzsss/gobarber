@@ -165,6 +165,6 @@ Caso deseje utilizar outra forma para realizar as requisições, as rotas dispon
 
 ---
 
-Desenvolvido com 💜 por Antony Lemos 🧑🏽‍🚀
+Desenvolvido com 💜 por Gabriel Menezes
 
 
